@@ -20,7 +20,6 @@ export class TodoAddComponent implements OnInit {
   }
 
   agregarTodo() {
-
     if ( this.txtInput.invalid) {
       return;
     }

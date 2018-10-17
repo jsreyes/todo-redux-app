@@ -3,7 +3,7 @@ import { Todo } from '../model/todo.model';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.reducers';
-import { ToogleTodoAction } from '../todo.actions';
+import { ToogleTodoAction, EditarTodoAction, BorrarTodoAction } from '../todo.actions';
 
 @Component({
   selector: 'app-todos-item',
@@ -29,12 +29,6 @@ export class TodosItemComponent implements OnInit {
     this.chkField = new FormControl( this.todo.completado );
     this.txtInput = new FormControl( this.todo.texto, Validators.required);
 
-    // Me muestra el cambio de cuando selecciona o deselecciona una tarea
-    // this.chkField.valueChanges
-    //     .subscribe(valor => {
-    //         console.log(valor);
-    //     });
-
     this.chkField.valueChanges
     .subscribe( () => {
       const accion = new ToogleTodoAction( this.todo.id );
@@ -52,7 +46,22 @@ export class TodosItemComponent implements OnInit {
   terminarEdicion() {
     this.editando = false;
 
-    console.log('Accion de edicion');
+    if (this.txtInput.invalid) {
+      return;
+    }
+
+    if (this.txtInput.value === this.todo.texto) {
+      return;
+    }
+
+    // Dispara la acción de editar un todo
+    const action = new EditarTodoAction(this.todo.id, this.txtInput.value);
+    this.store.dispatch(action);
+  }
+
+  borrarTodo() {
+    const action = new BorrarTodoAction(this.todo.id);
+    this.store.dispatch(action);
   }
 
 }
