@@ -9,6 +9,8 @@ export const TOOGLE_ALL_TODO = '[TODO] Toogle All todo';
 export const EDITAR_TODO = '[TODO] Editar todo';
 export const BORRAR_TODO = '[TODO] Borrar todo';
 
+export const BORRAR_TODO_COMPLETADOS = '[TODO] Borrar todos completados';
+
 export class AgregarTodoAction implements Action {
 
   readonly type = AGREGAR_TODO;
@@ -54,4 +56,14 @@ export class BorrarTodoAction implements Action {
 
 }
 
-export type Acciones = AgregarTodoAction | ToogleTodoAction | EditarTodoAction | BorrarTodoAction | ToogleAllTodoAction;
+export class BorrarTodoCompletadoAction implements Action {
+
+  readonly type = BORRAR_TODO_COMPLETADOS;
+
+  // Recibo un id para saber cual es el que debo borrar
+  // constructor( public id: number) {}
+
+}
+
+export type Acciones = AgregarTodoAction | ToogleTodoAction | EditarTodoAction |
+                        BorrarTodoAction | ToogleAllTodoAction | BorrarTodoCompletadoAction;

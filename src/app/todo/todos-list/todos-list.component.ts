@@ -11,6 +11,7 @@ import { Todo } from '../model/todo.model';
 export class TodosListComponent implements OnInit {
 
   todos: Todo[] = [];
+  filtro: string;
 
   constructor( private store: Store<AppState>) { }
 
@@ -18,6 +19,7 @@ export class TodosListComponent implements OnInit {
 
     this.store.subscribe ( state => {
       this.todos = state.todos;
+      this.filtro = state.filtro;
     });
   }
 

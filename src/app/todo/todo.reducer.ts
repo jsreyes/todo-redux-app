@@ -2,9 +2,9 @@ import * as fromTodo from "./todo.actions";
 import { Todo } from "./model/todo.model";
 
 // Estados pre-cargados
-const todo1 = new Todo("Vencer a Thanos");
-const todo2 = new Todo("Salvar al mundo");
-const todo3 = new Todo("Pedir prestado traje Iron Man");
+const todo1 = new Todo('Vencer a Thanos');
+const todo2 = new Todo('Salvar al mundo');
+const todo3 = new Todo('Pedir prestado traje Iron Man');
 
 todo2.completado = true;
 
@@ -56,6 +56,10 @@ export function todoReducer(
     case fromTodo.BORRAR_TODO:
       // Regresa un nuevo arreglo de todos los elementos excepto el objeto que tenga el id del action
       return state.filter(todoEdit => todoEdit.id !== action.id);
+
+    case fromTodo.BORRAR_TODO_COMPLETADOS:
+      // Regresa un nuevo arreglo de todos los elementos excepto el objeto que tenga el id del action
+      return state.filter(todoEdit => !todoEdit.completado );
 
     default:
       return state;
