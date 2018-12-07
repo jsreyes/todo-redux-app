@@ -15,3 +15,5 @@ export function filtroReducer(
       return state;
   }
 }
+
+// prueba
